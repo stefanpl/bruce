@@ -1,0 +1,9 @@
+createProjectDirectory();
+createCodeDirectory();
+linkCodeToProject();
+setupDockerEnvironment();
+startDocker();
+installNpmPackages();
+setupWebpack();
+createCodeFramework();
+gitCommit();

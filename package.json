@@ -1,0 +1,11 @@
+{
+  "name": "bruce",
+  "version": "0.0.1",
+  "description": "Bruce is your friendly, powerful digital assistant",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "spl",
+  "license": "ISC"
+}

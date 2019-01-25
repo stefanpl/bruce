@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": { "*": ["types/*"] },
+    "outDir": "./dist/",
+    "noImplicitAny": false,
+    "strictNullChecks": true,
+    "lib": ["es2016"],
+    "module": "es6",
+    "sourceMap": true,
+    "target": "es6",
+    "allowJs": true
+  }
+}
