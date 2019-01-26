@@ -4,8 +4,21 @@
   "description": "Bruce is your friendly, powerful digital assistant",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "npm run development",
+    "prod": "npm run production",
+    "development": "NODE_ENV=development npx webpack --mode=development",
+    "watch": "NODE_ENV=development npx webpack --mode=development --watch",
+    "production": "NODE_ENV=production npx webpack --mode=production",
+    "test": "NODE_ENV=testing npx mocha dist/tests.compiled.js",
+    "test-debug": "NODE_ENV=testing node --inspect-brk=0.0.0.0:9231 ./node_modules/mocha/bin/_mocha --no-timeouts dist/tests.compiled.js"
   },
   "author": "spl",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^10.12.18",
+    "ts-loader": "^5.3.3",
+    "typescript": "^3.2.4",
+    "webpack": "^4.29.0",
+    "webpack-cli": "^3.2.1"
+  }
 }
