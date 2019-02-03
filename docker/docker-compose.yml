@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+
+
+  rethinkdb:
+    image: rethinkdb:2.3
+    extra_hosts:
+      "dockerhost": ${DOCKER_HOST_IP}
+    ports:
+      - "8038:8080"
+      - "28001:28015"
+    volumes:
+      - "./docker-volumes/rethinkdb-data:/data/rethinkdb_data"
+    networks:
+      webnet:
+        aliases:
+          - docker.service.rethinkdb
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+
+
+networks:
+    webnet:   
