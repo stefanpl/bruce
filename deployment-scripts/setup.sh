@@ -24,6 +24,7 @@ source "${BASH_UTILS_LOCATION}/copyExampleFile.sh"
 
 # Set up docker
 copyExampleFile "./docker/.env.docker.example"
+copyExampleFile "./.env.example"
 initializeRethinkDataDirectory "./docker/docker-volumes/rethinkdb-data/"
 
 source ${scriptDirectory}/start.sh
