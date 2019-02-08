@@ -8,7 +8,7 @@ function runCommandOnNodeContainer() {
 
   scriptDirectory=$( dirname ${BASH_SOURCE[0]} )
   pushd ${scriptDirectory}/../ > /dev/null
-  trap "popd > /dev/null" EXIT RETURN
+  trap "popd > /dev/null 2>&1" EXIT RETURN
 
   absolutePathToCode=`pwd`
   workdir=/home/node/app

@@ -3,22 +3,35 @@ version: "3"
 services:
 
 
-  rethinkdb:
-    image: rethinkdb:2.3
-    extra_hosts:
-      "dockerhost": ${DOCKER_HOST_IP}
-    ports:
-      - "8038:8080"
-      - "28001:28015"
+  # rethinkdb:
+  #   image: rethinkdb:2.3
+  #   extra_hosts:
+  #     "dockerhost": ${DOCKER_HOST_IP}
+  #   ports:
+  #     - "${RETHINK_ADMIN_PORT}:8080"
+  #     - "${RETHINK_DB_PORT}:28015"
+  #   volumes:
+  #     - "./docker-volumes/rethinkdb-data:/data/rethinkdb_data"
+  #   networks:
+  #     webnet:
+  #       aliases:
+  #         - docker.service.rethinkdb
+  #   deploy:
+  #     placement:
+  #       constraints: [node.role == manager]
+
+  nodeserver:
+    image: "keymetrics/pm2:8-stretch"
+    user: "node"
+    working_dir: /home/node/app
     volumes:
-      - "./docker-volumes/rethinkdb-data:/data/rethinkdb_data"
+      - ./../:/home/node/app
+    ports:
+      - "${HTTP_PORT}:3005"
+      - "${NODE_DEBUGGER_PORT}:9230"
+    command: "node --inspect=0.0.0.0:9230 ./dist/app.compiled.js"
     networks:
-      webnet:
-        aliases:
-          - docker.service.rethinkdb
-    deploy:
-      placement:
-        constraints: [node.role == manager]
+      - webnet
 
 
 networks:

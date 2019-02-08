@@ -1,3 +1,6 @@
-let welcome = 'hey there';
+let counter = 0;
 
-console.log(welcome);
+setInterval( () => {
+  console.log('counter is '+counter);
+  counter++;
+}, 5000);
