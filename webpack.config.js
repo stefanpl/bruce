@@ -32,5 +32,5 @@ module.exports = {
   plugins: [
   ],
   target: 'node',
-  devtool: "inline-source-map",
+  devtool: "source-map",
 };

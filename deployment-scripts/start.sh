@@ -27,6 +27,7 @@ export DOCKER_HOST_IP=${DOCKER_HOST_IP}
 export RETHINK_ADMIN_PORT=${RETHINK_ADMIN_PORT}
 export RETHINK_DB_PORT=${RETHINK_DB_PORT}
 export HTTP_PORT=${HTTP_PORT}
-export NODE_DEBUGGER_PORT=${NODE_DEBUGGER_PORT}
+export SERVER_DEBUG_PORT=${SERVER_DEBUG_PORT}
+export TESTS_DEBUG_PORT=${TESTS_DEBUG_PORT}
 
 docker stack deploy -c ${scriptDirectory}/../docker/docker-compose.yml ${STACK_NAME}

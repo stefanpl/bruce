@@ -28,7 +28,8 @@ services:
       - ./../:/home/node/app
     ports:
       - "${HTTP_PORT}:3005"
-      - "${NODE_DEBUGGER_PORT}:9230"
+      - "${SERVER_DEBUG_PORT}:9230"
+      - "${TESTS_DEBUG_PORT}:9231"
     command: "node --inspect=0.0.0.0:9230 ./dist/app.compiled.js"
     networks:
       - webnet
