@@ -1,6 +1,3 @@
-let counter = 0;
+import server from "./server";
 
-setInterval( () => {
-  console.log('counter is '+counter);
-  counter++;
-}, 5000);
+server.start();

@@ -13,6 +13,6 @@ function runCommandOnNodeContainer() {
   absolutePathToCode=`pwd`
   workdir=/home/node/app
 
-  docker run --user node --mount type=bind,src=${absolutePathToCode},dst=${workdir} --workdir ${workdir} "keymetrics/pm2:8-stretch" \
+  docker run --user node --interactive --tty --mount type=bind,src=${absolutePathToCode},dst=${workdir} --workdir ${workdir} "keymetrics/pm2:8-stretch" \
     /bin/bash -c "${*}"
 }
