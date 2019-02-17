@@ -1,6 +1,6 @@
-import allRoutes from './routes';
 import middleware from "./middleware";
-import {Route} from "./interfaces/route";
+import {Endpoint} from "./interfaces/endpoint";
+import { mapOfAllEndpoints } from "./endpoints";
 
 const Router = require('koa-router-joi');
 // [https://www.npmjs.com/package/koa-router-joi](koa-router-joi) supports creating multiple router instances.
@@ -8,21 +8,21 @@ const Router = require('koa-router-joi');
 const defaultRouter = Router();
 
 
-(function setupRoutes () {
-  allRoutes.forEach(function assignRouteToRouter(route) {
+(function setupEndpoints () {
+  mapOfAllEndpoints.forEach(function assignEndpointToRouter(endpoint) {
     defaultRouter.route({
-      method: route.methods,
-      path: route.path,
-      validate: createValidationObjectForRoute(route),
-      handler: route.middleware,
+      method: endpoint.methods,
+      path: endpoint.path,
+      validate: createValidationObjectForEndpoint(endpoint),
+      handler: endpoint.middleware,
     });
   });
 })();
 
 
-function createValidationObjectForRoute(route: Route) {
-  return route.checkedInput ? {
-    body: route.checkedInput,
+function createValidationObjectForEndpoint(endpoint: Endpoint) {
+  return endpoint.checkedInput ? {
+    body: endpoint.checkedInput,
     type: 'json',
     continueOnError: false,
   } : {};

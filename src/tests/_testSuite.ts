@@ -1,1 +1,2 @@
 import './endpointTesting';
+import './quickTest';
