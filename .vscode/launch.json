@@ -15,6 +15,10 @@
       "remoteRoot": "/home/node/app",
       "restart": true,
       "outFiles": [ "${workspaceFolder}/dist/app.compiled*" ],
+      "skipFiles": [
+        "<node_internals>/**",
+        "node_modules/**",
+      ],
     },
     {
       "type": "node",
@@ -28,6 +32,10 @@
       "remoteRoot": "/home/node/app",
       "restart": true,
       "outFiles": [ "${workspaceFolder}/dist/tests.compiled*" ],
+      "skipFiles": [
+        "<node_internals>/**",
+        "node_modules/**",
+      ],
     },
   ]
 }

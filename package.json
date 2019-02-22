@@ -9,6 +9,7 @@
     "development": "NODE_ENV=development npx webpack --mode=development",
     "watch": "NODE_ENV=development npx webpack --mode=development --watch",
     "production": "NODE_ENV=production npx webpack --mode=production",
+    "restart-server-on-change": "SHELL=/bin/bash npx chokidar dist/* -c 'pm2 restart all'",
     "test": "NODE_ENV=testing npx mocha dist/tests.compiled.js",
     "test-debug": "NODE_ENV=testing node --inspect-brk=0.0.0.0:9231 ./node_modules/mocha/bin/_mocha --no-timeouts dist/tests.compiled.js"
   },
@@ -19,6 +20,7 @@
     "@types/node": "^10.12.18",
     "axios": "^0.18.0",
     "bash-utils": "git+https://github.com/stefanpl/bash-utils.git",
+    "chokidar-cli": "^1.2.2",
     "dotenv-safe": "^6.1.0",
     "koa": "^2.7.0",
     "koa-router": "^7.4.0",

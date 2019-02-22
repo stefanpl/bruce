@@ -2,24 +2,6 @@ version: "3"
 
 services:
 
-
-  # rethinkdb:
-  #   image: rethinkdb:2.3
-  #   extra_hosts:
-  #     "dockerhost": ${DOCKER_HOST_IP}
-  #   ports:
-  #     - "${RETHINK_ADMIN_PORT}:8080"
-  #     - "${RETHINK_DB_PORT}:28015"
-  #   volumes:
-  #     - "./docker-volumes/rethinkdb-data:/data/rethinkdb_data"
-  #   networks:
-  #     webnet:
-  #       aliases:
-  #         - docker.service.rethinkdb
-  #   deploy:
-  #     placement:
-  #       constraints: [node.role == manager]
-
   nodeserver:
     image: "keymetrics/pm2:8-stretch"
     user: "node"
@@ -30,7 +12,7 @@ services:
       - "${HTTP_PORT}:3005"
       - "${SERVER_DEBUG_PORT}:9230"
       - "${TESTS_DEBUG_PORT}:9231"
-    command: "node --inspect=0.0.0.0:9230 ./dist/app.compiled.js"
+    command: "pm2-runtime pm2.config.js --only bruce-${PM2_CONFIG_ENVIRONMENT}"
     networks:
       - webnet
 

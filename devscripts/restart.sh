@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-scriptDirectory=$( dirname ${BASH_SOURCE[0]} )
+source $( dirname ${BASH_SOURCE[0]} )/utils.sh
 
-source ${scriptDirectory}/stop.sh
-source ${scriptDirectory}/start.sh
+source ${SCRIPT_DIRECTORY}/stop.sh
+source ${SCRIPT_DIRECTORY}/start.sh

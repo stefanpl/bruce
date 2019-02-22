@@ -12,4 +12,4 @@ fi
 
 source ${scriptDirectory}/utils.sh
 
-runCommandOnNodeContainer ${*}
+runCommandOnNewNodeContainer ${*}
