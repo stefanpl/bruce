@@ -1,1 +1,1 @@
-This is bruce. Bruce is a digital assistant performing everyday tasks of the digital worker.
+This is bruce. It is still raw. It will become more.
