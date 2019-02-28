@@ -1,4 +1,4 @@
-import { Endpoint } from "./interfaces/endpoint";
+import { IEndpoint } from "./interfaces/endpoint";
 import listEndpointsController from "./controllers/listEndpointsController";
 import { createMapFromArray } from "./utils";
 
@@ -7,7 +7,7 @@ enum endpointIdentifiers {
 }
 
 
-const arrayOfAllEndpoints: Array<Endpoint> = [
+const arrayOfAllEndpoints: Array<IEndpoint> = [
   {
     identifier: endpointIdentifiers.getEndpoints,
     name: 'List available endpoints',

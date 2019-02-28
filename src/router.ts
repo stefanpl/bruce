@@ -1,5 +1,5 @@
 import middleware from "./middleware";
-import {Endpoint} from "./interfaces/endpoint";
+import {IEndpoint} from "./interfaces/endpoint";
 import { mapOfAllEndpoints } from "./endpoints";
 
 const Router = require('koa-router-joi');
@@ -20,7 +20,7 @@ const defaultRouter = Router();
 })();
 
 
-function createValidationObjectForEndpoint(endpoint: Endpoint) {
+function createValidationObjectForEndpoint(endpoint: IEndpoint) {
   return endpoint.checkedInput ? {
     body: endpoint.checkedInput,
     type: 'json',

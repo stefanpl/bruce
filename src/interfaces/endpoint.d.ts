@@ -1,6 +1,6 @@
 import * as Router from "koa-router";
 
-interface Endpoint extends ChattyEntity {
+interface IEndpoint extends ChattyEntity {
   identifier: number,
   path: string,
   methods: httpMethod | Array<httpMethod>,
