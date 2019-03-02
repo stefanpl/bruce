@@ -1,5 +1,6 @@
 interface ChattyEntity {
   name: string,
-  description: string,
-  tags: Array<string>,
+  aliases?: Array<string>,
+  description?: string,
+  tags?: Array<string>,
 }

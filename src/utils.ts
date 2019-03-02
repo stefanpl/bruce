@@ -1,4 +1,4 @@
-import { Endpoint } from "./interfaces/endpoint";
+import { IEndpoint } from "./interfaces/endpoint";
 import { mapOfAllEndpoints } from "./endpoints";
 import { Key } from "readline";
 
@@ -19,7 +19,7 @@ Map<ArrayElementType[KeyType], ArrayElementType> {
   return map;
 }
 
-function endpointByIdentifier(endpointIdentifier: number): Endpoint {
+function endpointByIdentifier(endpointIdentifier: number): IEndpoint {
   let endpoint = mapOfAllEndpoints.get(endpointIdentifier);
   if (endpoint === undefined) {
     throw new Error(`Could not get endpoint by identifier '${endpointIdentifier}'.`);
