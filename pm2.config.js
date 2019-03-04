@@ -24,7 +24,7 @@ devInstance.node_args = ["--inspect=0.0.0.0:9230"];
 
 let testInstance = createInstance('test');
 
-let liveInstance = createInstance('live');
+let liveInstance = createInstance('production');
 
 module.exports = {
   apps: [devInstance, testInstance, liveInstance]

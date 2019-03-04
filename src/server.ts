@@ -2,7 +2,7 @@ const Koa = require('koa');
 const app = new Koa();
 import defaultRouter from './router';
 require('dotenv-safe').config();
-const httpPortDefault = process.env.HTTP_PORT;
+const httpPortDefault = process.env.NODE_HTTP_PORT;
 import {runShutdownRoutines, runStartupRoutines} from "./serverLifetimeRoutines";
 
 let httpServer;
@@ -15,6 +15,7 @@ async function start(httpPort = httpPortDefault) {
   app.use(defaultRouter.middleware());
   await runStartupRoutines();
   httpServer = await app.listen(httpPort);
+  console.log('bruce server has started on port ' + httpPort);
 }
 
 async function close() {

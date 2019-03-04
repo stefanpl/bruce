@@ -19,7 +19,7 @@ if [ ! -z "${1}" ]; then
 fi
 
 setDockerHostIp
-exportVariablesFromFile ${SCRIPT_DIRECTORY}/../docker/.env.docker
 exportVariablesFromFile ${SCRIPT_DIRECTORY}/../.env
+exportVariablesFromFile ${SCRIPT_DIRECTORY}/../docker/.env.docker
 
 docker stack deploy -c ${SCRIPT_DIRECTORY}/../docker/docker-compose.yml ${STACK_NAME}
