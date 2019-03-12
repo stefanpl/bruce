@@ -9,7 +9,7 @@ services:
     volumes:
       - ./../:/home/node/app
     ports:
-      - "${HTTP_PORT}:3005"
+      - "${HTTP_PORT}:${NODE_HTTP_PORT}"
       - "${SERVER_DEBUG_PORT}:9230"
       - "${TESTS_DEBUG_PORT}:9231"
     command: "pm2-runtime pm2.config.js --only bruce-${PM2_CONFIG_ENVIRONMENT}"
