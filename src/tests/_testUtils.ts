@@ -1,12 +1,20 @@
 import axios, { AxiosResponse } from 'axios';
+import server from '../server';
 const { URL } = require('url');
 require('dotenv-safe').config();
-const httpPortDefault = process.env.HTTP_PORT;
+const httpPortDefault = process.env.NODE_HTTP_PORT;
 const assert = require('assert');
 
 async function getRequestToServer (route: string): Promise<AxiosResponse> {
   let fullUrl = new URL(route, `http://127.0.0.1:${httpPortDefault}/${route}`);
   return axios.get(fullUrl.href);
+}
+
+async function postRequestToServer (route: string, data: any): Promise<AxiosResponse> {
+  // @ts-ignore
+  let httpPort = server.app.httpPort;
+  let fullUrl = new URL(route, `http://127.0.0.1:${httpPort}/${route}`);
+  return axios.post(fullUrl.href, data);
 }
 
 function assertUtf8JsonResponse (response: AxiosResponse) {
@@ -18,5 +26,6 @@ function assertUtf8JsonResponse (response: AxiosResponse) {
 
 export {
   getRequestToServer,
+  postRequestToServer,
   assertUtf8JsonResponse,
 }

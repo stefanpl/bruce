@@ -4,7 +4,7 @@
 async function debugRequest(ctx, next) {
   // Put your debugging needs here
   // …
-  return await next();
+  await next();
 }
 
 

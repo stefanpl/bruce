@@ -11,11 +11,12 @@
     "production": "NODE_ENV=production npx webpack --mode=production",
     "restart-server-on-change": "SHELL=/bin/bash npx chokidar dist/* -c 'pm2 restart all'",
     "test": "NODE_ENV=testing npx mocha dist/tests.compiled.js",
-    "test-debug": "NODE_ENV=testing node --inspect-brk=0.0.0.0:9231 ./node_modules/mocha/bin/_mocha --no-timeouts dist/tests.compiled.js"
+    "test-debug": "NODE_ENV=testing node --inspect-brk=127.0.0.1:9231 ./node_modules/mocha/bin/_mocha --no-timeouts dist/tests.compiled.js"
   },
   "author": "spl",
   "license": "ISC",
   "dependencies": {
+    "@koa/cors": "^2.2.3",
     "@types/chai": "^4.1.7",
     "@types/mocha": "^5.2.5",
     "@types/node": "^10.12.18",
@@ -24,8 +25,12 @@
     "bash-utils": "git+https://github.com/stefanpl/bash-utils.git",
     "chai": "^4.2.0",
     "chokidar-cli": "^1.2.2",
+    "cors": "^2.8.5",
     "dotenv-safe": "^6.1.0",
     "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-cors": "0.0.16",
+    "koa-route": "^3.2.0",
     "koa-router": "^7.4.0",
     "koa-router-joi": "^1.0.1",
     "laradock-with-package-json": "git+https://github.com/stefanpl/laradock-with-package-json.git",

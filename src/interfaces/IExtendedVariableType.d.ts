@@ -1,6 +1,6 @@
-interface IExtendedVariableType<TSType> extends ChattyEntity {
+interface IExtendedVariableType<TypescriptType> extends ChattyEntity {
 
   schema: IJsonSchema,
-  additionalValidators?: Array<IVariableValidator<TSType>>,
+  additionalValidators?: Array<IVariableValidator<TypescriptType>>,
   
 }

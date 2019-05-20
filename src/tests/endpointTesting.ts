@@ -1,8 +1,8 @@
-import { getRequestToServer, assertUtf8JsonResponse } from "./_testUtils";
+import { getRequestToServer, assertUtf8JsonResponse, postRequestToServer } from "./_testUtils";
 import { find } from 'lodash';
 import { endpointByIdentifier } from "../utils";
 import { endpointIdentifiers } from "../endpoints";
-const assert = require('assert');
+import * as assert from 'assert';
 
 describe('The endpoint:', function() {
 
@@ -18,6 +18,19 @@ describe('The endpoint:', function() {
     let expectedEndpointName = endpoint.name;
     assert(!!find(response.data[expectedKey], (endpoint) => { return endpoint.name === expectedEndpointName }), 
       `Expected to receive an endpoint named '${expectedEndpointName}', but did not find one in the response object.`);
+  });
+
+  it('creates a new function execution', async function () {
+    let endpoint = endpointByIdentifier(endpointIdentifiers.functionExecution);
+    let response = await postRequestToServer('/function-execution/1', {workspace: 5});
+    assertUtf8JsonResponse(response);
+  });
+
+  it('serves CORS headers correctly', async function () {
+    let endpoint = endpointByIdentifier(endpointIdentifiers.getEndpoints);
+    let response = await getRequestToServer(endpoint.path);
+    console.log(`header is ${response.headers['access-control-allow-origin']}, ${response.headers['Access-Control-Allow-Origin']}`);
+    assert(response.headers['access-control-allow-origin'] === '*' || response.headers['Access-Control-Allow-Origin'] === '*');
   });
    
 });
