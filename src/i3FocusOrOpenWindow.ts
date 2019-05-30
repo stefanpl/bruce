@@ -1,6 +1,7 @@
 import * as cp from 'child_process';
+import { EXECUTABLE_PATH_i3 } from './i3Functions';
 
-function execShellCommand(command: string): Promise<string> {
+export async function execShellCommand(command: string): Promise<string> {
   return new Promise((resolve, reject) => {
    cp.exec(command, (error, stdout, stderr) => {
     if (error) {
@@ -11,7 +12,7 @@ function execShellCommand(command: string): Promise<string> {
   });
 }
 
-function i3ResultIsSuccessful(i3result): boolean {
+export function i3ResultIsSuccessful(i3result): boolean {
   try {
     const resultArray = JSON.parse(i3result);
     return !! resultArray[0].success;
@@ -45,16 +46,16 @@ function commandArgs2Array(text: string): Array<string> {
   return arr;
 }
 
+
 export async function i3FocusOrOpenWindow (windowMatchingExpression, commandToOpen) {
-  const i3msg = '/usr/bin/i3-msg';
   const escapedExpression = windowMatchingExpression.replace(/"/g, '\\"');
-  const command = `${i3msg} [${escapedExpression}] focus`
+  const command = `${EXECUTABLE_PATH_i3} [${escapedExpression}] focus`
   const result = await execShellCommand(command);
   if ( ! i3ResultIsSuccessful(result)) {
     let parts = commandArgs2Array(commandToOpen);
     const command = parts.splice(0, 1)[0];
     cp.spawn(command, parts, {
       detached: true,
-    });
+    }).unref();
   }
 }
