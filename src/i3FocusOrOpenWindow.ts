@@ -1,16 +1,6 @@
 import * as cp from 'child_process';
 import { EXECUTABLE_PATH_i3 } from './i3Functions';
-
-export async function execShellCommand(command: string): Promise<string> {
-  return new Promise((resolve, reject) => {
-   cp.exec(command, (error, stdout, stderr) => {
-    if (error) {
-     console.warn(error);
-    }
-    resolve(stdout? stdout : stderr);
-   });
-  });
-}
+import { execShellCommand } from './execShellCommand';
 
 export function i3ResultIsSuccessful(i3result): boolean {
   try {

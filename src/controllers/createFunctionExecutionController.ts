@@ -1,5 +1,4 @@
 import { commands, runCommand } from '../commands';
-import { execShellCommand } from '../exexShellCommand';
 
 type FunctionIdentifier = number | string;
 

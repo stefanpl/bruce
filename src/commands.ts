@@ -1,5 +1,5 @@
 import { i3FocusOrOpenWindow } from "./i3FocusOrOpenWindow";
-import { execShellCommand } from "./exexShellCommand";
+import { execShellCommand } from "./execShellCommand";
 import { i3FocusWorkspace } from "./i3FocusWorkspace";
 import { i3Focus } from "./i3Functions";
 

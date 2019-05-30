@@ -1,6 +1,7 @@
 import './endpointTesting';
 import './variable.test';
-import './book.test';
+import './tmux.test';
+import './execShellCommand.test';
 import server from '../server';
 import './quickTest';
 require('dotenv-safe').config();

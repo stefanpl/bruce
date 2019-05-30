@@ -22,7 +22,7 @@ describe('The endpoint:', function() {
 
   it('creates a new function execution', async function () {
     let endpoint = endpointByIdentifier(endpointIdentifiers.functionExecution);
-    let response = await postRequestToServer('/function-execution/1', {workspace: 5});
+    let response = await postRequestToServer('/function-execution/show-workspace', {arguments: [5]});
     assertUtf8JsonResponse(response);
   });
 

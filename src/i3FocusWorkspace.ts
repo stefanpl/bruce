@@ -1,4 +1,5 @@
-import { execShellCommand, i3ResultIsSuccessful } from "./i3FocusOrOpenWindow";
+import { i3ResultIsSuccessful } from "./i3FocusOrOpenWindow";
+import { execShellCommand } from "./execShellCommand";
 
 export async function i3FocusWorkspace (workspaceIdentifier: string | number): Promise<void> {
     const i3msg = '/usr/bin/i3-msg';

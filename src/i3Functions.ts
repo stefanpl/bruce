@@ -1,4 +1,4 @@
-import { execShellCommand } from "./exexShellCommand";
+import { execShellCommand } from "./execShellCommand";
 import * as i3wm from 'i3wm';
 
 export const EXECUTABLE_PATH_i3 = '/usr/bin/i3-msg';
@@ -17,5 +17,6 @@ interface i3Tree {
 // i3wm.Client.disconnect(client)
 
 export async function i3GetTree (): Promise<i3Tree> {
-  return JSON.parse(await execShellCommand('i3-msg -t get_tree'))
+  // return JSON.parse(await execShellCommand('i3-msg -t get_tree'))
+  return {}
 }
