@@ -1,11 +1,13 @@
-import { i3ResultIsSuccessful } from "./i3FocusOrOpenWindow";
-import { execShellCommand } from "./execShellCommand";
+import { execShellCommand } from "./commandExecution/execShellCommand";
+import { i3MsgExecutionSuccessful } from "./i3/i3MsgExecutionSuccessful";
+
+export const i3MsgBinary = '/usr/bin/i3-msg';
 
 export async function i3FocusWorkspace (workspaceIdentifier: string | number): Promise<void> {
-    const i3msg = '/usr/bin/i3-msg';
-    const command = `${i3msg} workspace ${workspaceIdentifier}`;
+    
+    const command = `${i3MsgBinary} workspace ${workspaceIdentifier}`;
     const result = await execShellCommand(command);
-    if ( ! i3ResultIsSuccessful(result)) {
-      console.error(`Could not open workspace ${workspaceIdentifier}`);
+    if ( ! i3MsgExecutionSuccessful(result)) {
+      throw Error(`Invalid i3 result. Put this check into its own function!`);
     }
 }

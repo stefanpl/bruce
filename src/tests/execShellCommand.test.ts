@@ -1,7 +1,8 @@
 import * as assert from 'assert';
-import { execShellCommand } from '../execShellCommand';
+import { execShellCommand } from '../commandExecution/execShellCommand';
 import { randomString, mustThrow } from '../utils';
 import * as fs from 'fs';
+import { expectSuccessfulExecution } from '../commandExecution/expectSuccessfulExecution';
 
 describe('shell command execution', function() {
 
@@ -27,6 +28,12 @@ describe('shell command execution', function() {
     await mustThrow(async () => {
       await execShellCommand(unknownCommand)
     })
+  });
+
+  it('expects an exit code 0', async function () {
+    await mustThrow(async function touchRoot() {
+      await expectSuccessfulExecution('touch /')
+    }, 'permission denied')
   });
 
 });

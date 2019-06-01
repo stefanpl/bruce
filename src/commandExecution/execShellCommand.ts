@@ -1,6 +1,6 @@
 import * as cp from 'child_process';
 
-interface ExecutionResult {
+export interface ExecutionResult {
   exitCode: number,
   stdout: string,
   stderr: string,

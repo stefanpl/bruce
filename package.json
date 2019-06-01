@@ -39,6 +39,7 @@
     "laradock-with-package-json": "git+https://github.com/stefanpl/laradock-with-package-json.git",
     "lodash": "^4.17.11",
     "mocha": "^5.2.0",
+    "sudo-prompt": "^8.2.5",
     "ts-loader": "^5.3.3",
     "typescript": "^3.2.4",
     "webpack": "^4.29.0",

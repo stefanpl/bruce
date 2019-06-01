@@ -75,6 +75,44 @@ export async function mustThrow(functionExpectedToThrow: Function, expectedError
   }
 }
 
+
+export async function waitSomeTime (timeInMs) {
+  return new Promise(function(resolve, reject) {
+    setTimeout(resolve, timeInMs)
+  });
+}
+
+
+export enum RETURN_AS_ARRAY_UNDEFINED_BEHAVIOR {
+  THROW,
+  EMPTY_ARRAY,
+  UNDEFINED_ARRAY_ELEMENT,
+}
+
+export function isArray(variable: any): boolean {
+  return Array.isArray(variable);
+}
+
+export function returnAsArray(
+  whateverYouGiveMe: any, 
+  allowUndefined: RETURN_AS_ARRAY_UNDEFINED_BEHAVIOR = RETURN_AS_ARRAY_UNDEFINED_BEHAVIOR.THROW
+  ): Array<any> {
+  if (isArray(whateverYouGiveMe)) {
+    return whateverYouGiveMe;
+  }
+  if (whateverYouGiveMe === undefined) {
+    switch (allowUndefined) {
+      case RETURN_AS_ARRAY_UNDEFINED_BEHAVIOR.EMPTY_ARRAY:
+        return [];
+      case RETURN_AS_ARRAY_UNDEFINED_BEHAVIOR.THROW:
+        throw new Error(`'undefined' has been passed, but not allowed via 'allowUndefined'.`);
+      case RETURN_AS_ARRAY_UNDEFINED_BEHAVIOR.UNDEFINED_ARRAY_ELEMENT:
+        return [undefined];
+    }
+  }
+  return [whateverYouGiveMe];
+}
+
 export {
   createMapFromArray,
   endpointByIdentifier,

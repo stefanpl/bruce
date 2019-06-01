@@ -1,10 +1,10 @@
-import { execShellCommand } from "./execShellCommand";
+import { execShellCommand } from "./commandExecution/execShellCommand";
 import * as i3wm from 'i3wm';
 
-export const EXECUTABLE_PATH_i3 = '/usr/bin/i3-msg';
+export const EXECUTABLE_PATH_i3_MSG = '/usr/bin/i3-msg';
 
 export async function i3Focus (direction) {
-  const command = `${EXECUTABLE_PATH_i3} focus ${direction}`
+  const command = `${EXECUTABLE_PATH_i3_MSG} focus ${direction}`
   return execShellCommand(command)
 }
 

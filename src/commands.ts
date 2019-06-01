@@ -1,7 +1,8 @@
 import { i3FocusOrOpenWindow } from "./i3FocusOrOpenWindow";
-import { execShellCommand } from "./execShellCommand";
+import { execShellCommand } from "./commandExecution/execShellCommand";
 import { i3FocusWorkspace } from "./i3FocusWorkspace";
 import { i3Focus } from "./i3Functions";
+import { switchToBruceMode } from "./switchToBruceMode";
 
 type Command = (string | Function)
 
@@ -12,6 +13,8 @@ export const commands: Record<string, Command> = {
   "reload": 'xdotool key ctrl+r',
   "focus-spotify": () => i3FocusOrOpenWindow('class="Spotify"', 'spotify'),
   "show-workspace": i3FocusWorkspace,
+  "bruce": switchToBruceMode,
+  "show-tmux-terminal": switchToBruceMode,
 }
 
 const i3Directions = ['up', 'left', 'down', 'right']
