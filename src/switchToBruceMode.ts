@@ -6,6 +6,9 @@ import { execShellCommand } from "./commandExecution/execShellCommand";
 import { tmuxHasClient } from "./tmux/tmuxHasClient";
 import { i3FocusWindow } from "./i3/i3FocusWindow";
 import { expectSuccessfulExecution } from "./commandExecution/expectSuccessfulExecution";
+import { spawnIndependantDetachedProcess } from "./commandExecution/spawnIndependantDetachedProcess";
+import { commands, runCommand } from "./commands";
+import { tmuxActivateSession } from "./tmux/tmuxActivateSession";
   
 
 export const TMUX_TERMINAL_TITLE = 'tmux terminal'
@@ -37,26 +40,9 @@ const bruceSession: TmuxSession = {
 export async function switchToBruceMode (): Promise<void> {
   
   await i3FocusWorkspace(1)
-  if ( ! await tmuxSessionExists(modeIdentifier)) {
-    await execShellCommand('zsh -c unb')
-    await tmuxStartSession(bruceSession)
-    await execShellCommand('zsh -c lnb')
-  }
-  await _switchOrStart()
-  await i3FocusWindow(`title="${TMUX_TERMINAL_TITLE}"`)
+  await tmuxActivateSession(bruceSession)
+  await runCommand(commands["show-tmux-terminal"])
+  await spawnIndependantDetachedProcess('zsh -c "brcv"')
 
-
-  async function _switchOrStart () {
-    if ( ! await tmuxHasClient()) {
-      await expectSuccessfulExecution('terminator', [
-        '--title',
-        'tmux terminal',
-        '--command',
-        `tmux --attach-session -t ${modeIdentifier}`
-      ])
-    } else {
-      await tmuxSwitchSession(modeIdentifier)
-    }
-  }
   
 }

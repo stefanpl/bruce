@@ -4,6 +4,7 @@ import { execShellCommand, ExecutionResult } from './commandExecution/execShellC
 import { i3MsgExecutionSuccessful } from './i3/i3MsgExecutionSuccessful';
 import { i3FocusWindow } from './i3/i3FocusWindow';
 import { spawnIndependantDetachedProcess } from './commandExecution/spawnIndependantDetachedProcess';
+import * as assert from 'assert';
 
 
 
@@ -12,7 +13,28 @@ export async function i3FocusOrOpenWindow (windowMatchingExpression, commandToOp
   if ( ! await i3FocusWindow(windowMatchingExpression)) {
     await spawnIndependantDetachedProcess(commandToOpen)
   }
-  // Now, the program should be running and soon become focusable
-  // TODO: use while loop instead of one-time timeout
-  setTimeout(() => i3FocusWindow(windowMatchingExpression), 500)
+  try {
+    await _recursivelyTryToFocusWindow()
+  } catch (error) {
+    console.error(error);
+  }
+  
+  function _recursivelyTryToFocusWindow(): Promise<void> {
+    const pauseBetweenRetries = 100
+    const maxAttempts = 20
+    let attemptsMade = 0
+    return new Promise(async function _tryToFocusWindow(resolve, reject) {
+      const focusAttained = await i3FocusWindow(windowMatchingExpression)
+      if ( ! focusAttained ) {
+        if (attemptsMade++ > maxAttempts) {
+          reject(Error(`i3 could not focus '${windowMatchingExpression}'`)
+          + ` within ${maxAttempts * pauseBetweenRetries} ms after executing ${commandToOpen}`);
+        } else {
+          setTimeout(() => _tryToFocusWindow(resolve, reject), pauseBetweenRetries)
+        }
+      } else {
+        resolve()
+      }
+    });
+  }
 }
