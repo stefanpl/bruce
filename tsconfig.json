@@ -10,6 +10,7 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "target": "es6",
+    "allowSyntheticDefaultImports": true,
     "allowJs": true
   }
 }

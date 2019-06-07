@@ -1,4 +1,4 @@
-import { ChildProcess, spawn } from "child_process";
+import { ChildProcess, spawn, SpawnOptions } from "child_process";
 
 
 function commandArgs2Array(text: string): Array<string> {
@@ -24,14 +24,17 @@ function commandArgs2Array(text: string): Array<string> {
 }
 
 export async function spawnIndependantDetachedProcess 
-(commandString: string, additionalArgs: Array<string> = []): Promise<ChildProcess> {
+(commandString: string, additionalArgs: Array<string> = [], spawnOptions: SpawnOptions = {}):
+ Promise<ChildProcess> {
   const debug = !! process.env.KEEP_PROCESSES_OPEN
   let parts = commandArgs2Array(commandString);
   const command = parts.splice(0, 1)[0];
-  const childProcess = spawn(command, parts.concat(additionalArgs), {
+  const defaultOptions = {
     detached: true,
     stdio: debug ? 'pipe' : 'ignore',
-  });
+  }
+  const options = Object.assign(defaultOptions, spawnOptions)
+  const childProcess = spawn(command, parts.concat(additionalArgs), options);
   _debugProcessOutput()
   childProcess.unref()
   return childProcess;

@@ -1,15 +1,10 @@
 import { i3FocusWorkspace } from "./i3FocusWorkspace";
-import { tmuxSessionExists } from "./tmux/tmuxSessionExists";
-import { tmuxSwitchSession } from "./tmux/tmuxSwitchSession";
-import { TmuxSession, tmuxStartSession } from "./tmux/tmuxCreateSession";
-import { execShellCommand } from "./commandExecution/execShellCommand";
-import { tmuxHasClient } from "./tmux/tmuxHasClient";
-import { i3FocusWindow } from "./i3/i3FocusWindow";
-import { expectSuccessfulExecution } from "./commandExecution/expectSuccessfulExecution";
+import { TmuxSession } from "./tmux/tmuxCreateSession";
+import promiseRetry from 'promise-retry';
 import { spawnIndependantDetachedProcess } from "./commandExecution/spawnIndependantDetachedProcess";
 import { commands, runCommand } from "./commands";
 import { tmuxActivateSession } from "./tmux/tmuxActivateSession";
-  
+
 
 export const TMUX_TERMINAL_TITLE = 'tmux terminal'
 
@@ -40,9 +35,22 @@ const bruceSession: TmuxSession = {
 export async function switchToBruceMode (): Promise<void> {
   
   await i3FocusWorkspace(1)
-  await tmuxActivateSession(bruceSession)
   await runCommand(commands["show-tmux-terminal"])
-  await spawnIndependantDetachedProcess('zsh -c "brcv"')
+  await spawnIndependantDetachedProcess('zsh -c brcv')
+  _tryToActivateSession()
 
-  
+  async function _tryToActivateSession() {
+    promiseRetry( async (retry, attempt) => {
+      try {
+        await tmuxActivateSession(bruceSession)
+      } catch(err) {
+        console.log(`retrying`);
+        retry(err)
+      }
+    }, {
+      minTimeout: 10,
+      maxTimeout: 200,
+      retries: 10,
+    })
+  }
 }
