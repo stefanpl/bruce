@@ -3,6 +3,7 @@ import { execShellCommand } from "./commandExecution/execShellCommand";
 import { i3FocusWorkspace } from "./i3FocusWorkspace";
 import { i3Focus } from "./i3Functions";
 import { switchToBruceMode, TMUX_TERMINAL_TITLE } from "./switchToBruceMode";
+import { switchToReaperMode } from "./switchToReaperMode";
 
 type Command = (string | Function)
 
@@ -14,6 +15,7 @@ enum CommandSlug {
   FOCUS_SPOTIFY = 'focus-spotify',
   CHANGE_i3_WORKSPACE = 'change-i3-workspace',
   MODE_BRUCE = 'mode-bruce',
+  MODE_REAPER = 'mode-reaper',
   SHOW_TMUX_TERMINAL = 'show-tmux-terminal',
 }
 
@@ -22,6 +24,7 @@ export const commands: Record<CommandSlug, Command> = {
   [CommandSlug.MEDIA_PAUSE]: 'playerctl pause',
   [CommandSlug.PRESS_CTRL_R]: 'xdotool key ctrl+r',
   [CommandSlug.PRESS_ESCAPE]: 'xdotool key Escape',
+  [CommandSlug.MODE_REAPER]: switchToReaperMode,
   [CommandSlug.FOCUS_SPOTIFY]: () => i3FocusOrOpenWindow('class="Spotify"', 'spotify'),
   [CommandSlug.CHANGE_i3_WORKSPACE]: i3FocusWorkspace,
   [CommandSlug.MODE_BRUCE]: switchToBruceMode,
