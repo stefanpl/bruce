@@ -2,6 +2,7 @@ import './endpointTesting';
 import './variable.test';
 import './tmux.test';
 import './i3/i3MsgExecutionSuccessful';
+import './bFunctions.test';
 import './execShellCommand.test';
 import server from '../server';
 import './quickTest';

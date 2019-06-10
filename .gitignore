@@ -4,3 +4,4 @@ node_modules
 .env.docker
 .env
 quickTest.ts
+_generatedCode

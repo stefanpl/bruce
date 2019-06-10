@@ -1,0 +1,10 @@
+{{#imports}}
+{{{.}}}
+{{/imports}}
+
+export {{#isAsync}}async {{/isAsync}}function {{ codeName }} 
+({{#parameters}}{{ nameInCode }}{{/parameters}}) {
+  {{#body}}
+  {{{.}}}
+  {{/body}}
+}

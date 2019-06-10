@@ -1,6 +1,8 @@
 import { IEndpoint } from "./interfaces/endpoint";
 import { mapOfAllEndpoints } from "./endpoints";
 import * as assert from 'assert';
+import { promisify } from "util";
+import * as fs from 'fs';
 
 export enum Charset {
   LETTERS_ONLY,
@@ -88,6 +90,19 @@ export enum RETURN_AS_ARRAY_UNDEFINED_BEHAVIOR {
   EMPTY_ARRAY,
   UNDEFINED_ARRAY_ELEMENT,
 }
+
+export async function readUtf8File (filePath: string): Promise<string> {
+  return new Promise(function(resolve, reject) {
+    fs.readFile(filePath, {
+      encoding: "utf8"
+    }, (err, data) => {
+      if(err) throw err
+      resolve(data)
+    })
+  });
+}
+
+export const writeFile: (path: string, text: string, options?: object ) => Promise<void> = promisify(fs.writeFile)
 
 export function isArray(variable: any): boolean {
   return Array.isArray(variable);

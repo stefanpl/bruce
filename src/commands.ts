@@ -1,9 +1,9 @@
 import { i3FocusOrOpenWindow } from "./i3FocusOrOpenWindow";
 import { execShellCommand } from "./commandExecution/execShellCommand";
-import { i3FocusWorkspace } from "./i3FocusWorkspace";
 import { i3Focus } from "./i3Functions";
 import { switchToBruceMode, TMUX_TERMINAL_TITLE } from "./switchToBruceMode";
 import { switchToReaperMode } from "./switchToReaperMode";
+import { i3FocusWorkspace } from "./i3FocusWorkspace";
 
 type Command = (string | Function)
 
