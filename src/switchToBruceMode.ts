@@ -4,6 +4,8 @@ import promiseRetry from 'promise-retry';
 import { spawnIndependantDetachedProcess } from "./commandExecution/spawnIndependantDetachedProcess";
 import { commands, runCommand } from "./commands";
 import { tmuxActivateSession } from "./tmux/tmuxActivateSession";
+import { tmuxWaitForClient } from "./tmux/tmuxWaitForClient";
+import { startTmuxTerminal } from "./functionAliases";
 
 
 export const TMUX_TERMINAL_TITLE = 'tmux terminal'
@@ -11,7 +13,7 @@ export const TMUX_TERMINAL_TITLE = 'tmux terminal'
 const modeIdentifier = 'bruce'
 const workingDir = '/home/stefan/webdev/bruce'
 
-const bruceSession: TmuxSession = {
+export const bruceSession: TmuxSession = {
   defaultCommand: 'zsh',
   defaultWorkingDir: workingDir,
   name: modeIdentifier,
@@ -33,24 +35,9 @@ const bruceSession: TmuxSession = {
 
 
 export async function switchToBruceMode (): Promise<void> {
-  
   await i3FocusWorkspace(1)
-  await runCommand(commands["show-tmux-terminal"])
+  await startTmuxTerminal()
   await spawnIndependantDetachedProcess('zsh -c brcv')
-  _tryToActivateSession()
-
-  async function _tryToActivateSession() {
-    promiseRetry( async (retry, attempt) => {
-      try {
-        await tmuxActivateSession(bruceSession)
-      } catch(err) {
-        console.log(`retrying`);
-        retry(err)
-      }
-    }, {
-      minTimeout: 10,
-      maxTimeout: 200,
-      retries: 10,
-    })
-  }
+  await tmuxWaitForClient()
+  await tmuxActivateSession(bruceSession)
 }

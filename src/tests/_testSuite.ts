@@ -1,3 +1,7 @@
+const logWhyRunning = process.env.WHY_IS_NODE_RUNNING
+if (logWhyRunning) {
+  var log = require('why-is-node-running')
+}
 import './endpointTesting';
 import './variable.test';
 import './tmux.test';
@@ -15,4 +19,7 @@ before('Suite setup', async function suiteSetup() {
 
 after('Suite teardown', async function suiteTeardown() {
   await server.close();
+  if (logWhyRunning) {
+    setTimeout(log, 200)
+  }
 });

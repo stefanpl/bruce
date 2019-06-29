@@ -1,4 +1,3 @@
-import { execShellCommand } from "../commandExecution/execShellCommand";
 import { expectSuccessfulExecution } from "../commandExecution/expectSuccessfulExecution";
 
 export async function tmuxHasClient (): Promise<boolean> {
