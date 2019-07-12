@@ -1,5 +1,5 @@
 import * as cp from 'child_process';
-import { EXECUTABLE_PATH_i3_MSG } from './i3Functions';
+import { EXECUTABLE_PATH_i3_MSG } from './i3FocusDirection';
 import { execShellCommand, ExecutionResult } from './commandExecution/execShellCommand';
 import { i3MsgExecutionSuccessful } from './i3/i3MsgExecutionSuccessful';
 import { i3FocusWindow } from './i3/i3FocusWindow';

@@ -1,6 +1,6 @@
 import { i3FocusOrOpenWindow } from "./i3FocusOrOpenWindow";
 import { execShellCommand } from "./commandExecution/execShellCommand";
-import { i3Focus } from "./i3Functions";
+import { i3FocusDirection } from "./i3FocusDirection";
 import { switchToBruceMode, TMUX_TERMINAL_TITLE } from "./switchToBruceMode";
 import { switchToReaperMode } from "./switchToReaperMode";
 import { i3FocusWorkspace } from "./i3FocusWorkspace";
@@ -34,7 +34,8 @@ export const commands: Record<CommandSlug, Command> = {
 
 const i3Directions = ['up', 'left', 'down', 'right']
 i3Directions.forEach( direction => {
-  commands[`focus-${direction}`] = () => { i3Focus(direction) }
+  // @ts-ignore
+  commands[`focus-${direction}`] = () => { i3FocusDirection(direction) }
 })
 
 export async function runCommand (commandOrCallback: Command, args: Array<any> = []) {
