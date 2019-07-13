@@ -1,5 +1,5 @@
 import { getRequestToServer, assertUtf8JsonResponse, postRequestToServer } from "./_testUtils";
-import { find } from 'lodash';
+import { find } from 'lodash-es';
 import { endpointByIdentifier } from "../utils";
 import { endpointIdentifiers } from "../endpoints";
 import * as assert from 'assert';

@@ -1,6 +1,4 @@
 import { expect } from 'chai';
-import { find } from 'lodash';
-import { cloneDeep } from 'lodash';
 import * as Ajv from 'ajv';
 
 const ajv = new Ajv();
