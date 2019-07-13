@@ -5,7 +5,7 @@ import { spawnIndependantDetachedProcess } from "./commandExecution/spawnIndepen
 import { commands, runCommand } from "./commands";
 import { tmuxActivateSession } from "./tmux/tmuxActivateSession";
 import { tmuxWaitForClient } from "./tmux/tmuxWaitForClient";
-import { startTmuxTerminal } from "./functionAliases";
+import { focusOrStartTmuxTerminal } from "./functionAliases";
 
 
 export const TMUX_TERMINAL_TITLE = 'tmux terminal'
@@ -36,7 +36,7 @@ export const bruceSession: TmuxSession = {
 
 export async function switchToBruceMode (): Promise<void> {
   await i3FocusWorkspace(1)
-  await startTmuxTerminal()
+  await focusOrStartTmuxTerminal()
   await spawnIndependantDetachedProcess('zsh -c brcv')
   await tmuxWaitForClient()
   await tmuxActivateSession(bruceSession)

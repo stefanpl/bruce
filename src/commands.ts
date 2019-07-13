@@ -4,7 +4,7 @@ import { i3FocusDirection } from "./i3FocusDirection";
 import { switchToBruceMode, TMUX_TERMINAL_TITLE } from "./switchToBruceMode";
 import { switchToReaperMode } from "./switchToReaperMode";
 import { i3FocusWorkspace } from "./i3FocusWorkspace";
-import { startTmuxTerminal } from "./functionAliases";
+import { focusOrStartTmuxTerminal } from "./functionAliases";
 
 type Command = (string | Function)
 
@@ -29,7 +29,7 @@ export const commands: Record<CommandSlug, Command> = {
   [CommandSlug.FOCUS_SPOTIFY]: () => i3FocusOrOpenWindow('class="Spotify"', 'spotify'),
   [CommandSlug.CHANGE_i3_WORKSPACE]: i3FocusWorkspace,
   [CommandSlug.MODE_BRUCE]: switchToBruceMode,
-  [CommandSlug.SHOW_TMUX_TERMINAL]: startTmuxTerminal,
+  [CommandSlug.SHOW_TMUX_TERMINAL]: focusOrStartTmuxTerminal,
 }
 
 const i3Directions = ['up', 'left', 'down', 'right']
