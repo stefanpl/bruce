@@ -8,7 +8,7 @@ import { focusOrStartTmuxTerminal } from "./functionAliases";
 
 type Command = (string | Function)
 
-enum CommandSlug {
+export enum CommandSlug {
   MEDIA_NEXT = "media-next",
   MEDIA_PAUSE = "media-pause",
   PRESS_CTRL_R = 'press-ctrl-r',
