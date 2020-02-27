@@ -7,30 +7,38 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].compiled.js'
+    filename: '[name].compiled.js',
   },
   // Do not replace process.env['NODE_ENV'] at compile time!
   optimization: {
-    nodeEnv: false
+    nodeEnv: false,
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
         use: 'ts-loader',
-        exclude: /node_modules/
-      }
-    ]
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.(tsx?|js)?$/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader',
+        options: {
+          // eslint options (if necessary)
+          fix: true,
+        },
+      },
+    ],
   },
   node: {
     __filename: true,
     __dirname: true,
   },
   resolve: {
-    extensions: [ '.tsx', '.ts', '.js' ]
+    extensions: ['.tsx', '.ts', '.js'],
   },
-  plugins: [
-  ],
+  plugins: [],
   target: 'node',
-  devtool: "source-map",
+  devtool: 'source-map',
 };

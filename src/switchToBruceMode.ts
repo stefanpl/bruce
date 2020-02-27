@@ -1,17 +1,14 @@
-import { i3FocusWorkspace } from "./i3FocusWorkspace";
-import { TmuxSession } from "./tmux/tmuxCreateSession";
-import promiseRetry from 'promise-retry';
-import { spawnIndependantDetachedProcess } from "./commandExecution/spawnIndependantDetachedProcess";
-import { commands, runCommand } from "./commands";
-import { tmuxActivateSession } from "./tmux/tmuxActivateSession";
-import { tmuxWaitForClient } from "./tmux/tmuxWaitForClient";
-import { focusOrStartTmuxTerminal } from "./functionAliases";
+import { i3FocusWorkspace } from './i3FocusWorkspace';
+import { TmuxSession } from './tmux/tmuxCreateSession';
+import { spawnIndependantDetachedProcess } from './commandExecution/spawnIndependantDetachedProcess';
+import { tmuxActivateSession } from './tmux/tmuxActivateSession';
+import { tmuxWaitForClient } from './tmux/tmuxWaitForClient';
+import { focusOrStartTmuxTerminal } from './functionAliases';
 
+export const TMUX_TERMINAL_TITLE = 'tmux terminal';
 
-export const TMUX_TERMINAL_TITLE = 'tmux terminal'
-
-const modeIdentifier = 'bruce'
-const workingDir = '/home/stefan/webdev/bruce'
+const modeIdentifier = 'bruce';
+const workingDir = '/home/stefan/webdev/bruce';
 
 export const bruceSession: TmuxSession = {
   defaultCommand: 'zsh',
@@ -24,20 +21,26 @@ export const bruceSession: TmuxSession = {
     },
     {
       name: 'restart pm2',
-      keysToBeSent: ['lnv', 'Enter', 'clear', 'Enter', 'npm run restart-server-on-change', 'Enter'],
+      keysToBeSent: [
+        'lnv',
+        'Enter',
+        'clear',
+        'Enter',
+        'npm run restart-server-on-change',
+        'Enter',
+      ],
     },
     {
       name: 'zsh',
       keysToBeSent: ['lnv', 'Enter', 'clear', 'Enter'],
     },
-  ]
-}
+  ],
+};
 
-
-export async function switchToBruceMode (): Promise<void> {
-  await i3FocusWorkspace(1)
-  await focusOrStartTmuxTerminal()
-  await spawnIndependantDetachedProcess('zsh -c brcv')
-  await tmuxWaitForClient()
-  await tmuxActivateSession(bruceSession)
+export async function switchToBruceMode(): Promise<void> {
+  await i3FocusWorkspace(1);
+  await focusOrStartTmuxTerminal();
+  await spawnIndependantDetachedProcess('zsh -c brcv');
+  await tmuxWaitForClient();
+  await tmuxActivateSession(bruceSession);
 }

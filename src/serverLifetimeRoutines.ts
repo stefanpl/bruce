@@ -1,10 +1,5 @@
-async function runStartupRoutines() {
-}
+async function runStartupRoutines() {}
 
-async function runShutdownRoutines() {
-}
+async function runShutdownRoutines() {}
 
-export {
-  runStartupRoutines,
-  runShutdownRoutines,
-};
+export { runStartupRoutines, runShutdownRoutines };

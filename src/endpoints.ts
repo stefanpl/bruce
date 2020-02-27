@@ -1,17 +1,15 @@
-import { IEndpoint } from "./interfaces/endpoint";
-import listEndpointsController from "./controllers/listEndpointsController";
-import { createMapFromArray } from "./utils";
-import listFunctionsController from "./controllers/listFunctionsController";
-import createFunctionExecutionController from "./controllers/createFunctionExecutionController";
 import * as bodyParser from 'koa-bodyparser';
+import { IEndpoint } from './interfaces/endpoint';
+import listEndpointsController from './controllers/listEndpointsController';
+import { createMapFromArray } from './utils';
+import listFunctionsController from './controllers/listFunctionsController';
+import createFunctionExecutionController from './controllers/createFunctionExecutionController';
 
 enum endpointIdentifiers {
   getEndpoints,
   getFunctions,
   functionExecution,
 }
-
-
 
 const arrayOfAllEndpoints: Array<IEndpoint> = [
   {
@@ -21,9 +19,7 @@ const arrayOfAllEndpoints: Array<IEndpoint> = [
     tags: [],
     methods: 'get',
     path: '/endpoints',
-    middleware: [
-      listEndpointsController,
-    ],
+    middleware: [listEndpointsController],
   },
   {
     identifier: endpointIdentifiers.getFunctions,
@@ -41,18 +37,10 @@ const arrayOfAllEndpoints: Array<IEndpoint> = [
     tags: [],
     methods: 'post',
     path: '/function-execution/:functionIdentifier',
-    middleware: [
-      bodyParser(),
-      createFunctionExecutionController,
-    ]
+    middleware: [bodyParser(), createFunctionExecutionController],
   },
 ];
 
-
 const mapOfAllEndpoints = createMapFromArray(arrayOfAllEndpoints, 'identifier');
 
-export {
-  mapOfAllEndpoints,
-  arrayOfAllEndpoints,
-  endpointIdentifiers,
-};
+export { mapOfAllEndpoints, arrayOfAllEndpoints, endpointIdentifiers };

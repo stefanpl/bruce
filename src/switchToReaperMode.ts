@@ -1,9 +1,9 @@
-import { TmuxSession } from "./tmux/tmuxCreateSession";
-import { i3FocusWorkspace } from "./i3FocusWorkspace";
-import { spawnIndependantDetachedProcess } from "./commandExecution/spawnIndependantDetachedProcess";
-import { showTmuxSessionInTerminal } from "./showTmuxSessionInTerminal";
+import { TmuxSession } from './tmux/tmuxCreateSession';
+import { i3FocusWorkspace } from './i3FocusWorkspace';
+import { spawnIndependantDetachedProcess } from './commandExecution/spawnIndependantDetachedProcess';
+import { showTmuxSessionInTerminal } from './showTmuxSessionInTerminal';
 
-const tmuxSessionIdentifier = 'midic'
+const tmuxSessionIdentifier = 'midic';
 
 const midiControllerSession: TmuxSession = {
   defaultCommand: 'zsh',
@@ -16,19 +16,26 @@ const midiControllerSession: TmuxSession = {
     },
     {
       name: 'http server',
-      keysToBeSent: ['lnv', 'Enter', 'clear', 'Enter', 'npx http-server dist', 'Enter'],
+      keysToBeSent: [
+        'lnv',
+        'Enter',
+        'clear',
+        'Enter',
+        'npx http-server dist',
+        'Enter',
+      ],
     },
     {
       name: 'zsh',
       keysToBeSent: ['lnv', 'Enter', 'clear', 'Enter'],
     },
-  ]
-}
+  ],
+};
 
-export async function switchToReaperMode (): Promise<void> {
+export async function switchToReaperMode(): Promise<void> {
   await Promise.all([
     i3FocusWorkspace(1),
     showTmuxSessionInTerminal(midiControllerSession),
     spawnIndependantDetachedProcess('reaper'),
-  ])
+  ]);
 }

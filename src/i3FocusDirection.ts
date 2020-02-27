@@ -1,10 +1,10 @@
-import { execShellCommand } from "./commandExecution/execShellCommand"
+import { execShellCommand } from './commandExecution/execShellCommand';
 
-export const EXECUTABLE_PATH_i3_MSG = '/usr/bin/i3-msg'
+export const EXECUTABLE_PATH_i3_MSG = '/usr/bin/i3-msg';
 
-type i3Direction = 'left' | 'right' | 'up' | 'down'
+type i3Direction = 'left' | 'right' | 'up' | 'down';
 
-export async function i3FocusDirection (direction: i3Direction) {
-  const command = `${EXECUTABLE_PATH_i3_MSG} focus ${direction}`
-  return execShellCommand(command)
+export async function i3FocusDirection(direction: i3Direction) {
+  const command = `${EXECUTABLE_PATH_i3_MSG} focus ${direction}`;
+  return execShellCommand(command);
 }
