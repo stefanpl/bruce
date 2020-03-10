@@ -5,9 +5,6 @@ set -e
 # It can be called with an --update-first flag to do a code update prior to starting the stack.
 
 source $( dirname ${BASH_SOURCE[0]} )/utils.sh
-source ${BASH_UTILS_LOCATION}/docker/setDockerHostIp.sh
-source ${BASH_UTILS_LOCATION}/logInfo.sh
-source ${BASH_UTILS_LOCATION}/exportVariablesFromFile.sh
 
 
 if [ ! -z "${1}" ]; then

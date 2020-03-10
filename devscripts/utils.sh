@@ -18,9 +18,7 @@ if [ ! -d "$BASH_UTILS_LOCATION" ]; then
   exit 1
 fi
 
-source ${BASH_UTILS_LOCATION}/logError.sh
-source ${BASH_UTILS_LOCATION}/exportVariablesFromFile.sh
-source ${BASH_UTILS_LOCATION}/docker/docker_find_container_id.sh
+source ${BASH_UTILS_LOCATION}/bootstrap.sh
 
 exportVariablesFromFile ${SCRIPT_DIRECTORY}/../.env
 exportVariablesFromFile ${SCRIPT_DIRECTORY}/../docker/.env.docker
