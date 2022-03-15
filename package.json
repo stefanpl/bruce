@@ -43,7 +43,7 @@
     "koa-router": "^7.4.0",
     "koa-router-joi": "^1.0.1",
     "laradock-with-package-json": "git+https://github.com/stefanpl/laradock-with-package-json.git",
-    "lodash-es": "^4.17.14",
+    "lodash-es": "^4.17.21",
     "mocha": "^5.2.0",
     "mustache": "^3.0.1",
     "promise-retry": "^1.1.1",
